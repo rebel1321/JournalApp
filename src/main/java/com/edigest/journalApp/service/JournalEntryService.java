@@ -24,30 +24,32 @@ public class JournalEntryService {
     private UserService userService;
 
 
+
     @Transactional
-    public void saveEntry(JournalEntry journalEntry, String userName){
+    public void saveEntry(JournalEntry journalEntry, String userName) {
         try {
             User user = userService.findByUserName(userName);
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry saved = journalEntryRepository.save(journalEntry);
             user.getJournalEntries().add(saved);
             userService.saveUser(user);
-        }catch(Exception e){
-            throw new RuntimeException("An error occured whiole saving the entry.",e);
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while saving the entry.", e);
         }
     }
 
-    public void saveEntry(JournalEntry journalEntry){
+    public void saveEntry(JournalEntry journalEntry) {
         journalEntryRepository.save(journalEntry);
     }
 
-
-    public List<JournalEntry> getAll(){
+    public List<JournalEntry> getAll() {
         return journalEntryRepository.findAll();
     }
-    public Optional<JournalEntry> findById(ObjectId id){
+
+    public Optional<JournalEntry> findById(ObjectId id) {
         return journalEntryRepository.findById(id);
     }
+
     @Transactional
     public boolean deleteById(ObjectId id, String userName) {
         boolean removed = false;

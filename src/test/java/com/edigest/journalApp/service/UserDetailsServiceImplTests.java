@@ -11,13 +11,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.when;
 
-@ActiveProfiles("dev")
 public class UserDetailsServiceImplTests {
 
     @InjectMocks
@@ -35,8 +33,8 @@ public class UserDetailsServiceImplTests {
     @Disabled
     @Test
     void loadUserByUsernameTest(){
-        when(userRepository.findByUserName(ArgumentMatchers.anyString())).thenReturn(User.builder().userName("Shyam").password("Shyam").roles(new ArrayList<>()).build());
-        UserDetails user = userDetailsService.loadUserByUsername("Shyam");
+        when(userRepository.findByUserName(ArgumentMatchers.anyString())).thenReturn(User.builder().userName("Satyam").password("Satyam").roles(new ArrayList<>()).build());
+        UserDetails user = userDetailsService.loadUserByUsername("Satyam");
         Assertions.assertNotNull(user);
     }
 }
